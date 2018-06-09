@@ -6,7 +6,7 @@ This web app is a project for the Udacity [FSND Course](https://www.udacity.com/
 This project is a RESTful web application utilizing the Flask framework which accesses a SQL database that populates categories and their items. OAuth2 provides authentication for further CRUD functionality on the application. Currently OAuth2 is implemented for Google Accounts.
 
 ## In This Repo
-This project has one main Python module `app.py` which runs the Flask application. A SQL database is created using the `database_setup.py` module and you can populate the database with test data using `database_init.py`.
+This project has one main Python module `app.py` which runs the Flask application. A SQL database is created using the `database_setup.py` module and you can populate the database with test data using `database_setup.py`.
 The Flask application uses stored HTML templates in the tempaltes folder to build the front-end of the application. CSS/JS/Images are stored in the static directory.
 
 ## Skills Honed
@@ -56,7 +56,7 @@ To get the Google login working there are a few additional steps:
 11. On the Dev Console Select Download JSON
 12. Rename JSON file to client_secrets.json
 13. Place JSON file in item-catalog directory that you cloned from here
-14. Run application using `python /item-catalog/app.py`
+14. Run application using `python /item-catalog/application.py`
 
 ## JSON Endpoints
 The following are open to the public:
