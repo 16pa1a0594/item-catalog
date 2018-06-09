@@ -8,7 +8,8 @@ from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 
 app = Flask(__name__)
 
-CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
+CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())
+['web']['client_id']
 
 # Connect to Database
 engine = create_engine('sqlite:///itemcatalog.db')
@@ -19,8 +20,12 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # User Helper Functions
+
+
 def createUser(login_session):
-    newUser = User(name=login_session['username'], email=login_session['email'], picture=login_session['picture'])
+    newUser = User(name=login_session['username'],
+                   email=login_session['email'],
+                   picture=login_session['picture'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
@@ -39,66 +44,80 @@ def getUserID(email):
     except:
         return None
 
+
 @app.route('/')
 @app.route('/catalog')
 def showCategories():
-	# Get all categories
-	categories = session.query(Category).all()
+    # Get all categories
+    categories = session.query(Category).all()
 
-	# Get lastest 5 category items added
-	categoryItems = session.query(CategoryItem).all()
+    # Get lastest 5 category items added
+    categoryItems = session.query(CategoryItem).all()
 
-	return render_template('categories.html', categories = categories, categoryItems = categoryItems)
+    return render_template('categories.html',
+                           categories=categories,
+                           categoryItems=categoryItems)
+
 
 @app.route('/catalog/<int:catalog_id>')
 @app.route('/catalog/<int:catalog_id>/items')
 def showCategory(catalog_id):
-	# Get all categories
-	categories = session.query(Category).all()
+    # Get all categories
+    categories = session.query(Category).all()
 
-	# Get category
-	category = session.query(Category).filter_by(id = catalog_id).first()
+    # Get category
+    category = session.query(Category).filter_by(id=catalog_id).first()
 
-	# Get name of category
-	categoryName = category.name
+    # Get name of category
+    categoryName = category.name
 
-	# Get all items of a specific category
-	categoryItems = session.query(CategoryItem).filter_by(category_id = catalog_id).all()
+    # Get all items of a specific category
+    categoryItems = session.query(CategoryItem).filter_by
+    (category_id=catalog_id).all()
 
-	# Get count of category items
-	categoryItemsCount = session.query(CategoryItem).filter_by(category_id = catalog_id).count()
+    # Get count of category items
+    categoryItemsCount = session.query(CategoryItem).filter_by
+    (category_id=catalog_id).count()
 
-	return render_template('category.html', categories = categories, categoryItems = categoryItems, categoryName = categoryName, categoryItemsCount = categoryItemsCount)
+    return render_template('category.html',
+                           categories=categories,
+                           categoryItems=categoryItems,
+                           categoryName=categoryName,
+                           categoryItemsCount=categoryItemsCount)
+
 
 @app.route('/catalog/<int:catalog_id>/items/<int:item_id>')
 def showCategoryItem(catalog_id, item_id):
-	# Get category item
-	categoryItem = session.query(CategoryItem).filter_by(id = item_id).first()
+    # Get category item
+    categoryItem = session.query(CategoryItem).filter_by(id=item_id).first()
 
-	# Get creator of item
-	creator = getUserInfo(categoryItem.user_id)
+    # Get creator of item
+    creator = getUserInfo(categoryItem.user_id)
 
-	return render_template('categoryItem.html', categoryItem = categoryItem, creator = creator)
+    return render_template('categoryItem.html',
+                           categoryItem=categoryItem, creator=creator)
+
 
 @app.route('/catalog/add', methods=['GET', 'POST'])
 def addCategoryItem():
-	# Check if user is logged in
-	if 'username' not in login_session:
-	    return redirect('/login')
+    # Check if user is logged in
+    if 'username' not in login_session:
+        return redirect('/login')
 
-	if request.method == 'POST':
-		# TODO: Retain data when there is an error
+    if request.method == 'POST':
+     if not request.form['name']:
+           flash('Please add instrument name')
+           return redirect(url_for('addCategoryItem'))
 
-		if not request.form['name']:
-			flash('Please add instrument name')
-			return redirect(url_for('addCategoryItem'))
+    if not request.form['description']:
+           flash('Please add a description')
+           return redirect(url_for('addCategoryItem'))
 
-		if not request.form['description']:
-			flash('Please add a description')
-			return redirect(url_for('addCategoryItem'))
-
-		# Add category item
-		newCategoryItem = CategoryItem(name = request.form['name'], description = request.form['description'], category_id = request.form['category'], user_id = login_session['user_id'])
+        # Add category item
+        newCategoryItem = CategoryItem(name=request.form['name'],
+                                      description=request.form['description'], 
+                                      category_id=request.form['category'], 
+                                      user_id=login_session['user_id'])
 		session.add(newCategoryItem)
 		session.commit()
 
