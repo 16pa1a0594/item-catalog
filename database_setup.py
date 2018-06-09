@@ -19,8 +19,8 @@ class User(Base):
 class Category(Base):
     __tablename__ = 'category'
 
-    id = Column(Integer, primary_key = True)
-    name = Column(String(80), nullable = False)
+    id = Column(Integer, primary_key=True)
+    name = Column(String(80), nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
@@ -36,9 +36,9 @@ class Category(Base):
 class CategoryItem(Base):
     __tablename__ = 'category_item'
 
-    name = Column(String(80), nullable = False)
+    name = Column(String(80), nullable=False)
     description = Column(String(250))
-    id = Column(Integer, primary_key = True)
+    id = Column(Integer, primary_key=True)
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship(Category)
     user_id = Column(Integer, ForeignKey('user.id'))
