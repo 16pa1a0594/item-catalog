@@ -36,17 +36,20 @@ category1 = Category(name="horror", user_id=1)
 session.add(category1)
 session.commit()
 
-item1 = CategoryItem(name="muni", user_id=1,description="cast:lawrence",category=category1)
+item1 = CategoryItem(name="muni", user_id=1, description="cast:lawrence",
+                     category=category1)
 
 session.add(item1)
 session.commit()
 
-item2 = CategoryItem(name="ganga", user_id=1,description="cast:lawrence",category=category1)
+item2 = CategoryItem(name="ganga", user_id=1, description="cast:lawrence",
+                     category=category1)
 
 session.add(item2)
 session.commit()
 
-item3 = CategoryItem(name="shivalinga", user_id=1,description="cast:lawrence", category=category1)
+item3 = CategoryItem(name="shivalinga", user_id=1, description="cast:lawrence",
+                     category=category1)
 
 session.add(item3)
 session.commit()
@@ -57,17 +60,20 @@ category2 = Category(name="comedy", user_id=1)
 session.add(category2)
 session.commit()
 
-item1 = CategoryItem(name="sudigadu", user_id=1, description="cast:allarinaresh", category=category2)
+item1 = CategoryItem(name="sudigadu", user_id=1,
+                     description="cast:allarinaresh", category=category2)
 
 session.add(item1)
 session.commit()
 
-item2 = CategoryItem(name="loukyam", user_id=1,  description="cast:gopichand", category=category2)
+item2 = CategoryItem(name="loukyam", user_id=1,
+                     description="cast:gopichand", category=category2)
 
 session.add(item2)
 session.commit()
 
-item3 = CategoryItem(name="marakathamani", user_id=1, description="cast:aadhi", category=category2)
+item3 = CategoryItem(name="marakathamani", user_id=1,
+                     description="cast:aadhi", category=category2)
 
 session.add(item3)
 session.commit()
@@ -78,17 +84,20 @@ category3 = Category(name="emotional", user_id=1)
 session.add(category3)
 session.commit()
 
-item1 = CategoryItem(name="jailakusha", user_id=1, description="cast:NTR", category=category3)
+item1 = CategoryItem(name="jailakusha", user_id=1,
+                     description="cast:NTR", category=category3)
 
 session.add(item1)
 session.commit()
 
-item2 = CategoryItem(name="nani", user_id=1, description="cast:maheshbabu", category=category3)
+item2 = CategoryItem(name="nani", user_id=1,
+                     description="cast:maheshbabu", category=category3)
 
 session.add(item2)
 session.commit()
 
-item3 = CategoryItem(name="amacheppindhi", user_id=1, description="cast:madhavan", category=category3)
+item3 = CategoryItem(name="amacheppindhi", user_id=1,
+                     description="cast:madhavan", category=category3)
 
 session.add(item3)
 session.commit()
